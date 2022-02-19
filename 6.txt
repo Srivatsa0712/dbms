@@ -1,0 +1,9 @@
+1.select b.bookid,b.title,b.pub_name,ba.author_name,bc.noofcopies,bl.programmid from book b,book_author ba,book_copies bc,book_lending bl WHERE b.bookid=ba.bookid AND ba.bookid=bl.bookid AND bc.programmid = bl.programmid;
+
+2.select DISTINCT cardno from book_lending WHERE dateout between '20170101' AND '20170531' group by cardno HAVING COUNT(*)>3;
+
+3.
+
+4. create view v_publications as select pub_year from books;
+
+5. create view v_books as select b.bookid,b.title.bc.noofcopies from book b,book_copies bc,book_lending bl WHERE b.bookid = bc.bookid AND bc.programmid = bl.programmid;
