@@ -1,0 +1,3 @@
+3. select d.customername from depositor d,account a WHERE a.accno = d.accno AND a.branchname='Main' GROUP BY d.customername HAVING COUNT(*)>=2;
+
+4. select d.customername from depositor d,account a,branch b WHERE b.branchname = a.branchname AND a.accno = d.accno AND b.branchcity='Kalaburagi' GROUP BY d.customername HAVING COUNT(b.branchname) = select count(branchname)from branch WHERE branchcity='Kalaburagi';
