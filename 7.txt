@@ -1,0 +1,13 @@
+Queries:
+
+1. select grade,count(DISTINCT customerid) from customer where grade>(select AVG(grade) from customer where city='Bangalore');
+
+2. select salesmanid,name from salesman s where 1<(select salesmanid from customer WHERE s.salesmaind=salesmanid);
+
+3. select s.salesmanid,s.name,c.cust_name,s.commission from salesman s,customer c where s.city=city UNION
+	select salesmanid,name,commission,'NO-MATCH' from salesman where NOT City = ANY(select city from customer)order by 2 desc;
+
+4. create view BESTSALESMAN as select s.salesmanid,s.name,o.orddate from salesman s,orders o WHERE s.salesmanid = o.salesmanid AND 
+	o.purchase_amt = (select MAX(purchase_amt) from orders c WHERE c.orddate=o.orddate);
+
+5. delete from salesman where salesmanid='1000'; 

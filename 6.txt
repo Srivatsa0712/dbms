@@ -1,9 +1,35 @@
-1.select b.bookid,b.title,b.pub_name,ba.author_name,bc.noofcopies,bl.programmid from book b,book_author ba,book_copies bc,book_lending bl WHERE b.bookid=ba.bookid AND ba.bookid=bl.bookid AND bc.programmid = bl.programmid;
+Queries:
 
-2.select DISTINCT cardno from book_lending WHERE dateout between '20170101' AND '20170531' group by cardno HAVING COUNT(*)>3;
+1. Retrieve details of all books in the library – id, title, name of publisher, 
+authors, number of copies in each branch,etc. 
 
-3.
+SELECT B.BOOK_ID, B.TITLE, B.PUBLISHER_NAME, A.AUTHOR_NAME, 
+C.NO_OF_COPIES,L.BRANCH_ID 
+FROM BOOK B, BOOK_AUTHORS A, BOOK_COPIES C, LIBRARY_BRANCHL 
+WHEREB.BOOK_ID=A.BOOK_ID 
+AND B.BOOK_ID=C.BOOK_ID 
+AND L.BRANCH_ID=C.BRANCH_ID;
 
-4. create view v_publications as select pub_year from books;
+2. Get the particulars of borrowers who have borrowed more than 3 books, but 
+from Jan 2017 to Jun2017. 
 
-5. create view v_books as select b.bookid,b.title.bc.noofcopies from book b,book_copies bc,book_lending bl WHERE b.bookid = bc.bookid AND bc.programmid = bl.programmid;
+SELECT CARD_NO FROM 
+BOOK_LENDING 
+WHERE DATE_OUT BETWEEN ‘01-JAN-2017‘ AND ‘01-JUL-2017‘ 
+GROUP BY CARD_NO 
+HAVING COUNT (*)>3; 
+
+3. Delete a book in BOOK table. Update the contents of other tables to reflect this 
+data manipulationoperation. 
+
+DELETE FROM BOOK 
+WHERE BOOK_ID=3; 
+
+4. Partition the BOOK table based on year of publication. Demonstrate its working 
+with a simplequery. 
+CREATE VIEW V_PUBLICATION AS SELECT 
+PUB_YEAR 
+FROM BOOK;
+
+5. create view v_books as select b.bookid,b.title,c.noofcopies from book b,book_copies c,libtrary_programme l 
+	WHERE b.bookid=c.bookid AND c.programmeid = l.programmeid;
