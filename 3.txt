@@ -1,0 +1,8 @@
+QUERIES:
+
+4. select c.courseno,t.book_isbn,t.book_title from course c,book_adoption ba,text t WHERE c.courseno=ba.courseno AND t.book_isbn=ba.book_isbn
+	AND c.dept='CSE' AND 2 < (select book_isbn from book_adoption b WHERE b.courseno = c.courseno) ORDER BY t.book_title;
+
+5. select c.dept from course WHERE c.dept IN(select c.dept from course c,text t,book_adoption ba WHERE c.courseno=ba.courseno AND t.book_isbn=ba.book_isbn
+	AND t.publisher = 'Pearson') AND c.dept NOT IN(select c.dept from course c,text t,book_adoption ba WHERE c.courseno=ba.courseno AND t.book_isbn=ba.book_isbn
+	AND t.publisher != 'Pearson');

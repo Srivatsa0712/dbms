@@ -1,0 +1,6 @@
+QUERIES:
+
+3. select * from author where authorid in(select authorid from catalog where year>2000 AND price>(select AVG(price) from catalog)GROUP BY authorid HAVING COUNT(*)>1);
+
+4. select author_name from author a,catalog c WHERE a.authorid = c.authorid AND bookid IN(select bookid from order_details WHERE 
+	quantity=(select MAX(quantity))from order_details); 

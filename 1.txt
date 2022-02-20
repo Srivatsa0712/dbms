@@ -1,0 +1,14 @@
+Queries:
+
+1. select sname from student s,enrolled e,class c,faculty f WHERE s.snum = e.snum AND c.cname = e.cname AND s.level='JR' AND 
+	f.fname='Harshith' AND f.fid = c.fid;
+
+2. select cname from class WHERE room='R-128' or cname in(select e.cname from enrolled e GROUP BY e.cname HAVING COUNT(*)>2);
+
+3. select s.sname from student s WHERE s.snum IN(select e1.snum from enrolled e1,enrolled e2,class c1,class c2 	WHERE e1.snum=e2.sum AND 
+	e1.cname<>e2.cname AND e1.cname=c1.cname AND e2.cname=c2.cname AND c1.meets_at = c2.meets_at);
+
+4. select f.fid,f.fname from faculty f where f.fid IN(select fid from class GROUP BY fid HAVING COUNT(*) = (select COUNT(DISTINCT room) from class));
+
+5. select f.fid,f.fname from faculty f where f.fid IN(select c.fid from class c,enrolled e WHERE e.cname = c.cname GROUP BY c.cname
+	HAVING COUNT(c.cname)<5);

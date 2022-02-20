@@ -1,0 +1,14 @@
+QUERIES:
+
+1. select aname from aircraft a,certified c,employee e WHERE a.aid=c.aid AND c.eid=e.eid and e.salary>80000;
+
+2. select c.eid,max(cruisingrange) from certified c,aircraft a WHERE a.aid=c.aid GROUP BY c.eid HAVING COUNT(*)>3;
+
+3. select e.ename from employee e WHERE e.salary<(select min(f.price) from flights f WHERE f.fromm='Bengaluru' AND f.too='FrankFrut');
+
+4. select a.aid,a.aname,AVG(e.salary) from aircraft a,employee e,certified c WHERE a.aid=c.aid AND e.eid=c.eid AND cruisingrange>1000 
+	GROUP BY a.aid,a.aname;
+
+5. select e.ename from aircraft a,employee e,certifid c WHERE a.aid=c.aid AND e.eid=c.eid AND a.aname='Boeing';
+
+6. select a.aid form aircraft a where a.cruisingrange>(select min(f.distance) from flights f WHERE f.fromm='Bengaluru' AND f.too='New Delhi');
